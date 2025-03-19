@@ -1,0 +1,61 @@
+.why{
+    background-image: url("../../assets/why-hero-bg-new.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    .divwhy{
+        display: flex;
+        justify-content: center;
+        .main-why{
+            margin-top: 40vh;
+            color: white;
+            font-family: "Louize";
+            font-size: 200px;
+        }
+    }
+    .main-text{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 7vh;
+        .text1{
+            width: 40vw;
+            font-size: 40px;
+            font-family: "Louize";
+        }
+    }
+    .why-text2{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40vh;
+        .why21{
+            margin-top: 20vh;
+            position: relative;
+            width: 40vw;
+            display: flex;
+            flex-direction: column;
+            img{
+                position: absolute;
+                z-index: -1;
+                top: 0;
+                left: 2vw;
+            }
+            .why2head{
+                font-size: 50px;
+                font-family: "Louize";
+                z-index: 100;
+                line-height: 1;
+                margin-top: 15vh;
+            }
+            .why2text{
+                font-weight: 300;
+            }
+        }
+        .why22,.why24{
+            img{
+                left: 15vw;
+            }
+        }
+    }
+}

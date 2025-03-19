@@ -1,0 +1,571 @@
+.How {
+    background-image: url("../../assets/how-hero-bg.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100vw;
+
+    .mainhow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .howimg {
+            margin-top: 62vh;
+
+            img {
+                width: 38vw;
+            }
+        }
+
+        .howtext {
+            margin-top: 40vh;
+            font-size: 30px;
+            font-family: louize;
+
+            .howtext1 {
+                margin-left: 20vw;
+                margin-bottom: 10vh;
+            }
+
+            .howtext2 {
+                .org {
+                    color: #FF5925;
+                }
+            }
+        }
+
+        .recimgs {
+            margin-top: 30vh;
+
+            img {
+                width: 60vw;
+            }
+        }
+
+        .finalhow {
+            margin-top: 20vh;
+
+            img {
+                width: 30vw;
+                margin-left: 10vw;
+            }
+
+            .everything {
+                // width: 90vw;
+                // border: 2px solid #ffc2da;
+                // border-radius: 24px;
+                // flex-direction: column;
+                // display: flex;
+                // align-items: center;
+                width: 90vw;
+                border-radius: 24px;
+                flex-direction: column;
+                display: flex;
+                align-items: center;
+                position: relative;
+                padding: 10px;
+                /* Adjust padding as needed */
+
+                /* Add a pseudo-element for the gradient border */
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    padding: 2px;
+                    /* Border width */
+                    border-radius: 24px;
+                    /* Match the border-radius */
+                    background: linear-gradient(to bottom, #ffa1c7, #8cadff, #6a8871, #967259);
+                    -webkit-mask:
+                        linear-gradient(#fff 0 0) content-box,
+                        linear-gradient(#fff 0 0);
+                    mask:
+                        linear-gradient(#fff 0 0) content-box,
+                        linear-gradient(#fff 0 0);
+                    -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+                    pointer-events: none;
+                    /* Prevent it from interfering */
+                }
+
+                .ever-text {
+                    margin-top: 10vh;
+                    font-size: 60px;
+                    width: 80vw;
+                    text-align: center;
+                    font-family: louize;
+                    font-weight: 500;
+                }
+
+                .journal {
+                    margin-top: 5vw;
+                    width: 80vw;
+                    border-radius: 24px;
+                    height: 100vh;
+                    background-color: #fcf0f4;
+
+                    .jou-tit {
+                        margin-left: 2rem;
+                        margin-top: 2rem;
+                        width: fit-content;
+                        padding: 2px 20px;
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: white;
+                        border-radius: 24px;
+                        background-color: #f98dce;
+                    }
+
+                    .jou-text {
+                        .jou-main {
+                            font-size: 50px;
+                            font-family: Louize;
+                            font-style: italic;
+                            margin-left: 5vw;
+                            margin-top: 5vh;
+                            margin-bottom: 2vh;
+                            color: #ff96d5;
+                        }
+
+                        .jou-title {
+                            background: none;
+                            outline: none;
+                            border: none;
+                            font-size: 40px;
+                            font-family: louize;
+                            text-transform: capitalize;
+                            width: 68vw;
+                            margin-left: 6vw;
+
+                            &::placeholder {
+                                color: #ffc2da;
+                            }
+                        }
+
+                        .jou-line {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 1vh;
+
+                            .jou-pine {
+                                width: 70vw;
+                                height: 2px;
+                                border-radius: 50px;
+                                background-color: #ffa1c7;
+                            }
+                        }
+
+                        .jou-area {
+                            width: 68vw;
+                            border: 2px solid #ffa1c7;
+                            margin-left: 6vw;
+                            margin-top: 2vh;
+                            height: 45vh;
+                            background: none;
+                            outline: none;
+                            --sb-track-color: #ffe2ee;
+                            --sb-thumb-color: #ffa1c7;
+                            --sb-size: 6px;
+                            border-radius: 24px;
+
+                            .jou-here {
+                                padding: 20px;
+                                width: 67vw;
+                                height: 43vh;
+                                margin-top: 1vh;
+                                border: none;
+                                background: none;
+                                outline: none;
+                                border-radius: 24px;
+
+                                &::placeholder {
+                                    color: #ffc2da;
+                                }
+
+                                &::-webkit-scrollbar {
+                                    width: var(--sb-size);
+                                }
+
+                                &::-webkit-scrollbar-track {
+                                    background: var(--sb-track-color);
+                                    border-radius: 6px;
+                                }
+
+                                &::-webkit-scrollbar-thumb {
+                                    background: var(--sb-thumb-color);
+                                    border-radius: 6px;
+                                    cursor: default;
+                                }
+                            }
+                        }
+
+                        .jou-btn-div {
+                            margin-top: 4vh;
+                            margin-right: 7vw;
+
+                            .jou-button {
+                                float: right;
+                                background-color: #ff9ed8;
+                                color: white;
+                                border: none;
+                                border-radius: 24px;
+                                padding: 4px 20px;
+                                cursor: pointer;
+                                transition: all 0.3s;
+
+                                &:hover {
+                                    background-color: #f98dce;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .prev-journal {
+                    margin-top: 4vh;
+                    border-radius: 24px;
+                    width: 80vw;
+                    height: 100vh;
+                    background-color: #f2f5fa;
+
+                    .prev-jou-tit {
+                        margin-left: 2rem;
+                        margin-top: 2rem;
+                        width: fit-content;
+                        padding: 2px 20px;
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: white;
+                        border-radius: 24px;
+                        background-color: #749bff;
+                    }
+
+                    .prev-jou-text {
+                        .prev-jou-main {
+                            font-size: 50px;
+                            font-family: Louize;
+                            font-style: italic;
+                            margin-left: 5vw;
+                            margin-top: 5vh;
+                            margin-bottom: 1vh;
+                            color: #749bff;
+                        }
+
+                        .prev-jou-line {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 1vh;
+
+                            .prev-jou-pine {
+                                width: 70vw;
+                                height: 2px;
+                                border-radius: 50px;
+                                background-color: #8cadff;
+                            }
+                        }
+
+                        .journal-container {
+                            width: 68vw;
+                            border: 2px solid #8cadff;
+                            margin-left: 6vw;
+                            margin-top: 2vh;
+                            height: 66vh;
+                            background: none;
+                            outline: none;
+                            border-radius: 24px;
+
+                            .prev-con {
+                                display: grid;
+                                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                                gap: 20px;
+                                padding: 0px 20px;
+                                width: 67vw;
+                                height: 62vh;
+                                margin-top: 2vh;
+                                overflow: auto;
+                                --sb-track-color: #DAE4FF;
+                                --sb-thumb-color: #8CADFF;
+                                --sb-size: 6px;
+
+                                /* Scrollbar styling */
+                                &::-webkit-scrollbar {
+                                    width: var(--sb-size);
+                                }
+
+                                &::-webkit-scrollbar-track {
+                                    background: var(--sb-track-color);
+                                    border-radius: 6px;
+                                }
+
+                                &::-webkit-scrollbar-thumb {
+                                    background: var(--sb-thumb-color);
+                                    border-radius: 6px;
+                                    cursor: default;
+                                }
+
+                                .journal-entry {
+                                    background-color: #e2eaff;
+                                    padding: 15px;
+                                    border-radius: 10px;
+                                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                                    transition: transform 0.3s ease-in-out;
+
+                                    h2 {
+                                        font-size: 20px;
+                                        margin-bottom: 10px;
+                                        margin-top: 0;
+                                        color: #47526b;
+                                        font-family: louize;
+                                        font-style: italic;
+                                    }
+
+                                    p {
+                                        font-size: 16px;
+                                        color: #47526b;
+                                    }
+
+                                    &:hover {
+                                        transform: translateY(-3px);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .recom {
+                    margin-top: 4vh;
+                    border-radius: 24px;
+                    padding-bottom: 4vh;
+                    background-color: #EEF9F1;
+                    width: 80vw;
+                    height: 100vh;
+
+                    .rec-tit {
+                        margin-left: 2rem;
+                        margin-top: 2rem;
+                        width: fit-content;
+                        padding: 2px 20px;
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: white;
+                        border-radius: 24px;
+                        background-color: #354238;
+                    }
+
+                    .rec-text {
+                        .rec-main {
+                            font-size: 50px;
+                            font-family: Louize;
+                            font-style: italic;
+                            margin-left: 5vw;
+                            margin-top: 5vh;
+                            margin-bottom: 2vh;
+                            color: #4b6050;
+                        }
+
+                        .rec-line {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 1vh;
+
+                            .rec-pine {
+                                width: 70vw;
+                                height: 2px;
+                                border-radius: 50px;
+                                background-color: #6a8871;
+                            }
+                        }
+
+                        .recand {
+                            display: flex;
+                            justify-content: center;
+                            height: 66vh;
+                            margin-top: 2vh;
+
+                            .recdook {
+                                width: 68vw;
+                                border: 2px solid #6a8871;
+                                border-radius: 24px;
+
+                                .recs {
+                                    height: 62vh;
+                                    margin-top: 2vh;
+                                    margin-left: 1vw;
+                                    width: 66vw;
+                                    overflow: auto;
+                                    --sb-track-color: #ceebd0;
+                                    --sb-thumb-color: #6a8871;
+                                    --sb-size: 6px;
+
+                                    /* Scrollbar styling */
+                                    &::-webkit-scrollbar {
+                                        width: var(--sb-size);
+                                    }
+
+                                    &::-webkit-scrollbar-track {
+                                        background: var(--sb-track-color);
+                                        border-radius: 6px;
+                                    }
+
+                                    &::-webkit-scrollbar-thumb {
+                                        background: var(--sb-thumb-color);
+                                        border-radius: 6px;
+                                        cursor: default;
+                                    }
+
+                                    .rec {
+                                        margin-left: 2vw;
+
+                                        .reccat {
+                                            color: #354238;
+                                            font-size: 24px;
+                                            display: inline-block;
+                                            font-family: louize;
+                                            border-bottom: 2px solid #354238;
+                                            font-style: italic;
+                                        }
+                                        
+                                        .recdiv {
+                                            margin-right: 4vw;
+                                            display: flex;
+                                            gap: 2vw;
+
+                                            .receach {
+                                                .recimg {
+                                                    width: 10vw;
+                                                    margin: 0;
+                                                    border-radius: 12px;
+                                                }
+                                                .recquote {
+                                                    margin-top: 1vh;
+                                                    color: #4b6050;
+                                                    margin-bottom: 1vh;
+                                                    font-family: louize;
+                                                    font-style: italic;
+                                                }
+                                                .rectitle {
+                                                    margin-top: 1vh;
+                                                    color: #4b6050;
+                                                    margin-bottom: 1vh;
+                                                }
+                                                .recp{
+                                                    float: right;
+                                                    font-size: 16px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .weeks {
+                    margin-top: 4vh;
+                    width: 80vw;
+                    border-radius: 24px;
+                    height: 100vh;
+                    background-color: #faefe1;
+                    margin-bottom: 5vh;
+
+                    .week-tit {
+                        margin-left: 2rem;
+                        margin-top: 2rem;
+                        width: fit-content;
+                        padding: 2px 20px;
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: white;
+                        border-radius: 24px;
+                        background-color: #967259;
+                    }
+
+                    .week-text {
+                        .week-main {
+                            font-size: 50px;
+                            font-family: Louize;
+                            font-style: italic;
+                            margin-left: 5vw;
+                            margin-top: 5vh;
+                            margin-bottom: 5vh;
+                            color: #967259;
+                        }
+
+                        .week-line {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 1vh;
+
+                            .week-pine {
+                                width: 70vw;
+                                height: 2px;
+                                border-radius: 50px;
+                                background-color: #967259;
+                            }
+                        }
+
+                        .week-area {
+                            width: 68vw;
+                            border: 2px solid #967259;
+                            margin-left: 6vw;
+                            margin-top: 2vh;
+                            height: 63vh;
+                            background: none;
+                            outline: none;
+                            --sb-size: 6px;
+                            border-radius: 24px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .soft {
+            background-image: url("../../assets/fourth-section-bg.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: end;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .soft-title{
+                margin-top: 20vh;
+                font-family: louize;
+                text-align: center;
+                line-height: 1;
+                font-size: 90px;
+                margin-bottom: 10vh;
+            }
+            .soft-text{
+                margin-top: 0;
+                font-size: 24px;
+            }
+            .softdiv{
+                display: flex;
+                gap: 4vw;
+                margin: 5vh 10vw;
+                margin-bottom: 20vh;
+                .softbox{
+                    border-radius: 12px;
+                    background-color: white;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 2rem 2rem;
+                    .boximg{
+                        height: 4vw;
+                        width: 4vw;
+                    }
+                    .boxtitle{
+                        font-size: 40px;
+                        font-family: louize;
+                        line-height: 1;
+                        margin-top: 4vh;
+                    }
+                }
+            }
+        }
+    }
+}

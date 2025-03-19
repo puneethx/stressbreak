@@ -1,0 +1,89 @@
+.Header{
+  padding-top: 4vh;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  
+  &.scrolled {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    
+    .dot-nav {
+      background-color: white;
+      margin: 0 2vw;
+      border-radius: 50px;
+      padding: 10px 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+  }
+  
+  .dot-nav {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    
+    .logo-text{
+      padding-left: 3vw;
+      font-size: 30px;
+      font-family: "Louize";
+    }
+    
+    &__list {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: 2vw;
+    }
+    
+    &__item {
+      display: flex;
+      align-items: center;
+    }
+    
+    &__link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #000;
+    }
+    
+    &__dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    &__text {
+      font-weight: normal;
+      font-size: 20px;
+    }
+  }
+  
+  .menu{
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding-right: 2.5vw;
+    font-size: 20px;
+    .menu-item2{
+      background-color: #FF5924;
+      color: white;
+      padding: 5px 20px;
+      border-radius: 50px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+    .menu-item1 {
+      cursor: pointer;
+    }
+  }
+}

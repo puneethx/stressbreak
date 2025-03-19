@@ -1,19 +1,25 @@
-import './App.css';
+import React from 'react'
+import "./App.scss"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import What from './What/what';
-import Why from './Why/why';
+import What from './components/What/What'
+import Why from './components/Why/Why';
+import How from "./components/How/How";
+import Whatsnew from "./components/Whatsnew/Whatsnew";
+
 
 function App() {
-
   return (
     <BrowserRouter>
       <>
-        <p>"Route change"</p>
-        <Routes>
-          <Route path="/" element={<What/>}> </Route>
-          <Route path='/what' element={<What />}> </Route>
-          <Route path="/why" element={<Why />}> </Route>
-        </Routes>
+        <div className='main'>
+          <Routes>
+            <Route path="/" element={<What />}> </Route>
+            <Route path='/what' element={<What />}> </Route>
+            <Route path="/why" element={<Why />}> </Route>
+            <Route path="/how" element={<How />}> </Route>
+            <Route path="/whats-new" element={<Whatsnew />}> </Route>
+          </Routes>
+        </div>
       </>
     </BrowserRouter>
   )
