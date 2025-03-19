@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react';
 import "./What.scss"
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
@@ -9,6 +9,8 @@ import Read from "../../assets/features-read-without-distractions.png"
 import Collections from "../../assets/features-instant-collections.png"
 import Peace from "../../assets/Take-your-mind-with-you.png"
 import End from "../../assets/end.png"
+
+import Vsrc from "../../assets/full-what.mp4"
 
 import Rev1 from "../../assets/review_1.png"
 import Rev2 from "../../assets/review_2.png"
@@ -26,11 +28,33 @@ const What = () => {
     { text: 'moods', color: '#f1c40f', borderColor: '#f1c40f' },
     { text: 'progress', color: '#99ccff', borderColor: '#87cefa' }
   ];
-  
+
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    // Ensure video plays after component mounts
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.error("Video play failed:", error);
+      });
+    }
+  }, []);
+
   return (
     <div className='what'>
       <Header />
       <div className='what-main'>
+        <div className="video-div">
+          <video
+            className='video-main'
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            src={Vsrc}
+          />
+        </div>
         <div className='what-text'>
           <div className='text-main'>
             <span className='main1'>Track Your Feelings,</span>
@@ -101,20 +125,18 @@ const What = () => {
           </div>
           <section className='extension'>
             <div className='ext-text'>
-              <span className='ext-head'>The first and only extension <br />for your emotional well-being.</span><br />
-              <span className='ext-sub'>One place for everything that affects your mind.
-                No need to analyze, categorize, or overthink it just express yourself freely.
-                StressBreak organizes your thoughts, tracks your emotions, and provides meaningful insights, all in one thoughtfully designed space.</span>
+              <span className='ext-head'>The first and only extension <br />for your real mind.</span><br />
+              <span className='ext-sub'>StressBreak lets you freely express your thoughts without overthinking.<br/> It organizes your mind, tracks emotions, and provides meaningful <br/> insights all in one thoughtfully designed space.</span>
             </div>
           </section>
         </section>
         <section className='works-sec'>
           <div>
-            <span className='works'>it just works</span><br />
-            <span className='works-head'>Just write it. Artificial Intelligence takes care of the rest.</span><br />
-            <span className='works-sub'>Log your thoughts effortlessly and stay in the moment.
-              StressBreak understands your emotions and tracks the important patterns, so you don’t have to.
-            </span>
+            <p className='works'>It just works</p><br />
+            <p className='works-head'>Just write it. Artificial Intelligence <br/> takes care of the rest.</p><br />
+            <p className='works-sub'>Log your thoughts effortlessly and stay in the moment.<br/>
+              StressBreak understands your emotions and tracks <br/> the important patterns, so you don’t have to.
+            </p>
           </div>
         </section>
         <section className='time-sec'>
@@ -222,7 +244,7 @@ const What = () => {
           </div>
         </section>
       </div>
-      <section><Footer/></section>
+      <section><Footer /></section>
     </div>
   )
 }

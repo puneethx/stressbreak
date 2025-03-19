@@ -5,6 +5,7 @@ import What from './components/What/What'
 import Why from './components/Why/Why';
 import How from "./components/How/How";
 import Whatsnew from "./components/Whatsnew/Whatsnew";
+import Signin from './components/Signin/Signin';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/why" element={<Why />}> </Route>
             <Route path="/how" element={<How />}> </Route>
             <Route path="/whats-new" element={<Whatsnew />}> </Route>
+            <Route path="/signin" element={<Signin/>}></Route>
           </Routes>
         </div>
       </>

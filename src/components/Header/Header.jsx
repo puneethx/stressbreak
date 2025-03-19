@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./Header.scss"
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -14,7 +15,7 @@ const Header = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
-        
+
         // Clean up the event listener
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -50,8 +51,8 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className='menu'>
-                    <div className='menu-item1'>Login</div>
-                    <button className='menu-item2'>Sign Up</button>
+                    <Link to="/signin"><p className='menu-item1'>Login</p></Link>
+                    <Link to="/signup"><button className='menu-item2'>Sign Up</button></Link>
                 </div>
             </nav>
         </div>

@@ -7,6 +7,17 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 10vh;
+        position: relative;
+
+        .video-div{
+            position: absolute;
+            top: 0;
+            .video-main {
+                height: 120vh;
+                width: auto;
+                z-index: -1;
+            }
+        }
 
         .what-text {
             display: flex;
@@ -14,11 +25,12 @@
             align-items: center;
             flex-direction: column;
             align-items: center;
-            background-image: url('../../assets/main_hero.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 120vh;
+            // background-image: url('../../assets/main_hero.png');
+            // background-size: cover;
+            // background-position: center;
+            // background-repeat: no-repeat;
+            // height: 120vh;
+            z-index: 0;
 
             .text-main {
                 width: 100vw;
@@ -30,7 +42,7 @@
                 font-size: 60px;
                 font-family: "Louize";
                 line-height: 1;
-                margin-top: 7.5vh;
+                margin-top: 8vh;
             }
 
             .text-sub {
@@ -41,6 +53,7 @@
                 align-items: center;
                 padding-top: 2vh;
                 font-weight: 300;
+                margin-bottom: 10vh;
 
                 .pill-text {
                     padding: 7px 18px;
@@ -64,12 +77,13 @@
 
             .manifesto {
                 display: flex;
-                margin-top: -50vh;
+                margin-bottom: 15vh;
+                width: 80vw;
+                // margin-top: -50vh;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 padding: 7.5vh 10vw;
-                width: 80vw;
                 font-weight: 400;
                 background: rgba(255, 255, 255, 0.37);
                 border-radius: 16px;
@@ -113,6 +127,7 @@
                 }
 
                 .man-try {
+                    margin-bottom: 10vh;
                     button {
                         background-color: #FF5924;
                         color: white;
@@ -147,13 +162,12 @@
                 margin-top: 10vh;
 
                 .ext-text {
-                    width: 60vw;
                     display: flex;
                     flex-direction: column;
                     gap: 1vh;
 
                     .ext-head {
-                        font-size: 50px;
+                        font-size: 70px;
                         line-height: 1;
                         font-family: "Louize";
                     }
@@ -168,17 +182,23 @@
 
         .works-sec {
             margin-top: 7.5vh;
-            width: 55vw;
             text-align: center;
-
+            margin-bottom: 10vh;
             .works {
                 font-size: 20px;
                 color: #FF5924;
+                margin-bottom: 0;
             }
 
             .works-head {
                 font-size: 20px;
-                margin-top: 2vh;
+                font-family: louize;
+                font-size: 40px;
+                margin: 0;
+                line-height: 1;
+            }
+            .works-sub{
+                margin-top: 4vh;
             }
         }
 
