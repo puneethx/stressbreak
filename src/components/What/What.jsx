@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import "./What.scss"
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
@@ -57,8 +57,12 @@ const What = () => {
         </div>
         <div className='what-text'>
           <div className='text-main'>
-            <span className='main1'>Track Your Feelings,</span>
-            <span className='main2'>Transform Your Mind.</span>
+            <span className='main1'>
+              Track Your Feelings,
+            </span>
+            <span className='main2'>
+              Transform Your Mind.
+            </span>
           </div>
           <div className='text-sub'>
             <span>All your{' '} <span
