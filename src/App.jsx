@@ -1,8 +1,9 @@
 import React from 'react'
 import "./App.scss"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import What from './components/What/What'
+
 import Why from './components/Why/Why';
+import What from './components/What/what';
 import How from "./components/How/How";
 import Whatsnew from "./components/Whatsnew/Whatsnew";
 import Signin from './components/Signin/Signin';
