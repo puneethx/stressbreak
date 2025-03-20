@@ -5,3 +5,11 @@
   width: 100%;
   overflow: hidden;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+}
