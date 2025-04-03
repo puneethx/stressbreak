@@ -58,7 +58,7 @@ const Header = () => {
                         {navItems.map((item, index) => (
                             <li key={index} className="dot-nav__item">
                                 <a href={item.path} className="dot-nav__link">
-                                    <span
+                                    <span 
                                         className="dot-nav__dot"
                                         style={{ backgroundColor: item.color }}
                                     ></span>
