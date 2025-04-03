@@ -537,8 +537,13 @@
                 position: relative;
                 margin-bottom: 50vh;
 
+                .end-tit{
+                    font-size: 30px;
+                    font-weight: 300;
+                }
                 .end-img {
                     position: absolute;
+                    top: 2vh;
                 }
 
                 .end-text {

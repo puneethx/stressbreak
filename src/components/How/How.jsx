@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import Howimg from "../../assets/how_main_11.png"
 import Recimg from "../../assets/rec_imgs.png"
 import Everything from "../../assets/everything.png"
 import "./How.scss"
+import { analyzeJournal } from '../../services/apiService'
+import { getCurrentUser } from '../../services/authService'
+import JournalAnalysis from '../JournalAnalysis/JournalAnalysis'
+import WeeklyInsights from '../WeeklyInsights/WeeklyInsights'
 
 import recbook from "../../assets/recbook.png";
 import recbook2 from "../../assets/recbook2.png";
@@ -17,12 +21,17 @@ import box1 from "../../assets/box1.png"
 import box2 from "../../assets/box2.png"
 import box3 from "../../assets/box3.png"
 
-
 const How = () => {
+    const [journalTitle, setJournalTitle] = useState('');
+    const [journalContent, setJournalContent] = useState('');
+    const [analysisData, setAnalysisData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const currentUser = getCurrentUser();
 
     const recommendations = {
         Quotes: [
-            { id: 1, quote: "The key is not to prioritize what's on your schedule, but to schedule your priorities." , by: "Stephen Covey"}
+            { id: 1, quote: "The key is not to prioritize what's on your schedule, but to schedule your priorities.", by: "Stephen Covey" }
         ],
         Books: [
             { id: 1, name: "Ikigai", image: recbook },
@@ -40,7 +49,6 @@ const How = () => {
         ],
     };
 
-
     const journalData = [
         { id: 1, title: "Morning Reflections", journal: "Today started with a peaceful sunrise and a cup of coffee." },
         { id: 2, title: "Coding Adventures", journal: "Explored React hooks and built a new project from scratch." },
@@ -54,6 +62,31 @@ const How = () => {
         { id: 10, title: "Family Time", journal: "Had a great dinner with family, lots of laughter." }
     ];
 
+    const handleJournalSubmit = async (e) => {
+        e.preventDefault();
+        
+        if (!journalContent.trim()) {
+            setError('Please write something in your journal.');
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+        
+        try {
+            const result = await analyzeJournal(journalContent);
+            setAnalysisData(result);
+            
+            // We don't reset the title or content immediately so we can keep the title for the analysis
+            // The inputs will clear if the user starts a new journal
+        } catch (err) {
+            console.error('Error analyzing journal:', err);
+            setError('Failed to analyze journal. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className='How'>
             <Header />
@@ -63,8 +96,8 @@ const How = () => {
                 </div>
                 <div className='howtext'>
                     <div className="howtext1">
-                        <span>There’s a lot of magic and some<br />
-                            intelligence behind it, but let’s <br />
+                        <span>There's a lot of magic and some<br />
+                            intelligence behind it, but let's <br />
                             keep it simple for now...
                         </span>
                     </div>
@@ -89,18 +122,50 @@ const How = () => {
                             <p className='jou-tit'>Journal</p>
                             <div className='jou-text'>
                                 <p className='jou-main'>New Entry</p>
-                                <input className='jou-title' placeholder='Title' name='title' type='text' required ></input>
-                                <div className='jou-line'>
-                                    <div className="jou-pine"></div>
-                                </div>
-                                <div className="jou-area">
-                                    <textarea className='jou-here' placeholder='Write your journal here...' required />
-                                </div>
-                                <div className="jou-btn-div">
-                                    <button className='jou-button' type='submit'>Reflect</button>
-                                </div>
+                                <form onSubmit={handleJournalSubmit}>
+                                    <input 
+                                        className='jou-title' 
+                                        placeholder='Title' 
+                                        name='title' 
+                                        type='text'
+                                        value={journalTitle}
+                                        onChange={(e) => setJournalTitle(e.target.value)}
+                                        required 
+                                    />
+                                    <div className='jou-line'>
+                                        <div className="jou-pine"></div>
+                                    </div>
+                                    <div className="jou-area">
+                                        <textarea 
+                                            className='jou-here' 
+                                            placeholder='Write your journal here...'
+                                            value={journalContent}
+                                            onChange={(e) => setJournalContent(e.target.value)}
+                                            required 
+                                        />
+                                    </div>
+                                    {error && <p className="journal-error">{error}</p>}
+                                    <div className="jou-btn-div">
+                                        <button 
+                                            className='jou-button' 
+                                            type='submit'
+                                            disabled={loading}
+                                        >
+                                            {loading ? 'Analyzing...' : 'Reflect'}
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                        
+                        {/* Display journal analysis if available */}
+                        {analysisData && (
+                            <JournalAnalysis 
+                                analysisData={analysisData} 
+                                journalTitle={journalTitle}
+                            />
+                        )}
+                        
                         <div className="prev-journal">
                             <p className='prev-jou-tit'>Previous Journals</p>
                             <div className='prev-jou-text'>
@@ -164,13 +229,14 @@ const How = () => {
                                     <div className="week-pine"></div>
                                 </div>
                                 <div className="week-area">
+                                    <WeeklyInsights />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="soft">
-                    <p className='soft-title'>We believe software<br />should stay out of the<br /> way and let you focus<br /> on what matters–<br /> which isn’t software.</p>
+                    <p className='soft-title'>We believe software<br />should stay out of the<br /> way and let you focus<br /> on what matters–<br /> which isn't software.</p>
                     <p className='soft-text'>Our 3 design principles</p>
                     <div className='softdiv'>
                         <div className='softbox'>
@@ -188,7 +254,7 @@ const How = () => {
                         <div className='softbox'>
                             <img className='boximg' src={box3} alt="" />
                             <span className='boxtitle'>Less features,<br />more magic.</span><br />
-                            <span className='boxtext'>We’re not focused on endless features—StressBreak just works. You don’t need to worry about how—it quietly does the work for you.<br /><br />
+                            <span className='boxtext'>We're not focused on endless features—StressBreak just works. You don't need to worry about how—it quietly does the work for you.<br /><br />
                                 Focus on feeling better, not managing another app, so you can spend more time on what truly matters.</span>
                         </div>
                     </div>
@@ -196,7 +262,6 @@ const How = () => {
                 </div>
             </div>
         </div>
-
     )
 }
 

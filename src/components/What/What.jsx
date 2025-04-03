@@ -18,7 +18,7 @@ import Rev3 from "../../assets/review_3.png"
 import Rev4 from "../../assets/review_4.png"
 import Rev5 from "../../assets/review_5.png"
 
-import F1 from "../../assets/NEW_-Bluesky-support.png"
+import F1 from "../../assets/doc-support.png"
 import F2 from "../../assets/screenshots_cover.png"
 import F3 from "../../assets/On-landscapes-believing-programming-your-mind.png"
 
@@ -105,7 +105,7 @@ const What = () => {
                 <span>In a world where our emotions are analyzed, our habits are tracked, and our well-being is monetized, true privacy feels like a luxury.</span><br /><br />
                 <span>Our thoughts are no longer our own shaped by algorithms, influenced by trends, and scattered across apps that profit from our struggles.</span> <br /><br />
                 <span>Mental health should never be a data point.
-                  What should have always been personal is now yours again. <span className='man-bold'>We promise:</span></span><br /><br />
+                  What should have always been personal is now yours again. <br/><span className='man-bold'>We promise:</span></span><br /><br />
               </div>
             </div>
             <div className='man-no'>
@@ -222,6 +222,7 @@ const What = () => {
             </div>
           </div>
           <div className='end'>
+            <span className='end-tit'>stressbreak</span>
             <img className='end-img' src={End} alt="" />
             <span className='end-text'>We’re redefining the way you reflect and grow with StressBreak, a refreshing approach to understanding your emotions and well-being. <br /><br />
               Your privacy comes first.<br /><br />

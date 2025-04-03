@@ -1,13 +1,22 @@
 import React, { useEffect } from 'react';
 import "./App.scss"
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 
 import Why from './components/Why/Why';
 import How from "./components/How/How";
-import What from "./components/What/What";
+import What from './components/What/what';
 import Whatsnew from "./components/Whatsnew/Whatsnew";
 import Signin from './components/Signin/Signin';
+import Signup from "./components/Signup/Signup"
+import { isLoggedIn } from './services/authService';
 
+// Protected route component
+const ProtectedRoute = ({ children }) => {
+  if (!isLoggedIn()) {
+    return <Navigate to="/signin" />;
+  }
+  return children;
+};
 
 function App() {
   function ScrollToTop() {
@@ -31,9 +40,14 @@ function App() {
             <Route path="/" element={<What />}> </Route>
             <Route path='/what' element={<What />}> </Route>
             <Route path="/why" element={<Why />}> </Route>
-            <Route path="/how" element={<How />}> </Route>
+            <Route path="/how" element={
+              <ProtectedRoute>
+                <How />
+              </ProtectedRoute>
+            }> </Route>
             <Route path="/whats-new" element={<Whatsnew />}> </Route>
             <Route path="/signin" element={<Signin />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
           </Routes>
         </div>
       </>

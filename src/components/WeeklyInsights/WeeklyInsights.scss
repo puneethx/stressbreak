@@ -1,0 +1,84 @@
+.weekly-insights {
+  padding: 0 2vw 2vw 2vw;
+  height: 94%;
+  margin-top: 2vh;
+  margin-right: 1vw;
+  overflow-y: auto;
+  max-height: 60vh;
+  
+  /* Scrollbar styling */
+  --sb-track-color: #f1e0cd;
+  --sb-thumb-color: #967259;
+  --sb-size: 6px;
+  
+  &::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 6px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 6px;
+    cursor: default;
+  }
+  
+  h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: black;
+  }
+  
+  h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: louize;
+    font-style: italic;
+    font-weight: 500;
+    color: #967258;
+  }
+  
+  h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: black;
+    font-weight: 500;
+  }
+
+  p{
+    color: black;
+    margin: 0;
+  }
+  
+  .loading, .error, .no-data {
+    text-align: center;
+    margin-top: 10vh;
+    margin-left: 5vw;
+    padding: 30px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .error {
+    color: #e74c3c;
+  }
+
+  .insights-container{
+    background-color: #e8d5bc;
+    padding: 5vh 5vh;
+    ul{
+      li{
+        color: black;
+        font-weight: 300;
+        list-style:none;
+      }
+    }
+    
+  }
+} 
