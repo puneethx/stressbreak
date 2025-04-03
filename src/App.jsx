@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 
 import Why from './components/Why/Why';
 import How from "./components/How/How";
-import What from './components/What/what';
+import What from "./components/What/What";
 import Whatsnew from "./components/Whatsnew/Whatsnew";
 import Signin from './components/Signin/Signin';
 import Signup from "./components/Signup/Signup"
