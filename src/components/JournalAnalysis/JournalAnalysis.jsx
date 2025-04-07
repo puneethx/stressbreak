@@ -10,7 +10,7 @@ const JournalAnalysis = ({ analysisData, journalTitle }) => {
 
   return (
     <div className="journal-analysis">
-      <h2>{journalTitle || 'Journal Analysis'}</h2>
+      <h2>{'Journal Analysis'}</h2>
       
       <div className="content-preview">
         <h3>{journalTitle || 'Journal Entry'}</h3>

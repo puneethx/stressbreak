@@ -9,6 +9,7 @@ import Whatsnew from "./components/Whatsnew/Whatsnew";
 import Signin from './components/Signin/Signin';
 import Signup from "./components/Signup/Signup"
 import { isLoggedIn } from './services/authService';
+import { WeeklyDataProvider } from './contexts/WeeklyDataContext';
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -42,7 +43,9 @@ function App() {
             <Route path="/why" element={<Why />}> </Route>
             <Route path="/how" element={
               <ProtectedRoute>
-                <How />
+                <WeeklyDataProvider>
+                  <How />
+                </WeeklyDataProvider>
               </ProtectedRoute>
             }> </Route>
             <Route path="/whats-new" element={<Whatsnew />}> </Route>

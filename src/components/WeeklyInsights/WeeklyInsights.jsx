@@ -1,36 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { fetchWeeklyReport } from '../../services/apiService';
+import React, { useEffect, useState, useContext } from 'react';
 import { getCurrentUser } from '../../services/authService';
 import EmotionBarChart from '../Charts/EmotionBarChart';
 import SentimentPieChart from '../Charts/SentimentPieChart';
 import './WeeklyInsights.scss';
+import { WeeklyDataContext } from '../../contexts/WeeklyDataContext';
 
 const WeeklyInsights = () => {
-  const [weeklyData, setWeeklyData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const currentUser = getCurrentUser();
-        if (!currentUser) {
-          throw new Error('User not authenticated');
-        }
-
-        const data = await fetchWeeklyReport(currentUser.user_id);
-        setWeeklyData(data);
-      } catch (err) {
-        console.error('Error fetching weekly data:', err);
-        setError('Failed to load weekly insights. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { weeklyData, loading, error } = useContext(WeeklyDataContext);
 
   if (loading) {
     return <div className="loading">Loading weekly insights...</div>;
@@ -40,17 +16,18 @@ const WeeklyInsights = () => {
     return <div className="error">{error}</div>;
   }
 
-  if (!weeklyData || !weeklyData.analysis) {
+  if (!weeklyData) {
     return <div className="no-data">No weekly data available yet.</div>;
   }
 
+  // Handle the new API response format
   const { 
     weekly_emotion_analysis,
     weekly_sentiment_analysis,
     progress_assessment,
     weekly_summary,
     cumulative_scores
-  } = weeklyData.analysis;
+  } = weeklyData;
 
   // Divide emotion values by 4 to make charts more proportional
   const scaledEmotions = {};

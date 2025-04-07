@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import Howimg from "../../assets/how_main_11.png"
 import Recimg from "../../assets/rec_imgs.png"
 import Everything from "../../assets/everything.png"
 import "./How.scss"
-import { analyzeJournal } from '../../services/apiService'
+import { analyzeJournal, fetchWeeklyReport } from '../../services/apiService'
 import { getCurrentUser } from '../../services/authService'
 import JournalAnalysis from '../JournalAnalysis/JournalAnalysis'
 import WeeklyInsights from '../WeeklyInsights/WeeklyInsights'
+import { WeeklyDataContext } from '../../contexts/WeeklyDataContext'
 
 import recbook from "../../assets/recbook.png";
 import recbook2 from "../../assets/recbook2.png";
@@ -28,6 +29,39 @@ const How = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const currentUser = getCurrentUser();
+    
+    // Get weekly data context
+    const { 
+        weeklyData, 
+        setWeeklyData, 
+        loading: weeklyLoading, 
+        setLoading: setWeeklyLoading,
+        error: weeklyError,
+        setError: setWeeklyError
+    } = useContext(WeeklyDataContext);
+
+    // Fetch weekly report on component mount
+    useEffect(() => {
+        const loadWeeklyData = async () => {
+            if (currentUser && !weeklyData) {
+                setWeeklyLoading(true);
+                try {
+                    console.log('Fetching weekly data for user:', currentUser.user_id);
+                    // Use a fixed user_id of 1 for testing as specified in the requirements
+                    const userId = currentUser.email === 'gundamanieshreddy2004@gmail.com' ? 1 : currentUser.user_id;
+                    const data = await fetchWeeklyReport(userId);
+                    setWeeklyData(data);
+                } catch (err) {
+                    console.error('Error pre-loading weekly data:', err);
+                    setWeeklyError('Failed to load weekly insights. Please try again later.');
+                } finally {
+                    setWeeklyLoading(false);
+                }
+            }
+        };
+        
+        loadWeeklyData();
+    }, [currentUser, weeklyData, setWeeklyData, setWeeklyLoading, setWeeklyError]);
 
     const recommendations = {
         Quotes: [
@@ -151,7 +185,7 @@ const How = () => {
                                             type='submit'
                                             disabled={loading}
                                         >
-                                            {loading ? 'Analyzing...' : 'Reflect'}
+                                            {loading ? 'Reflecting...' : 'Reflect'}
                                         </button>
                                     </div>
                                 </form>

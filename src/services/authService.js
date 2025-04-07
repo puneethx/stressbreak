@@ -30,6 +30,7 @@ export const signUp = (email, password) => {
   }
   
   // Create new user with a unique ID
+
   const newUser = {
     user_id: generateUserId(),
     email,
