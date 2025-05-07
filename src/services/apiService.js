@@ -6,6 +6,12 @@ const API_BASE_URL = 'https://stressbreak-backend.onrender.com';
 // Keep track of already fetched weekly reports data
 let weeklyReportCache = {};
 
+// Function to get auth header
+const getAuthHeader = () => {
+  const token = localStorage.getItem('token');
+  return token ? { 'Authorization': `Bearer ${token}` } : {};
+};
+
 // Function to analyze journal entry
 export const analyzeJournal = async (journalEntry) => {
   try {
@@ -13,6 +19,10 @@ export const analyzeJournal = async (journalEntry) => {
       `${API_BASE_URL}/journals/analyze`,
       null,
       {
+        headers: {
+          ...getAuthHeader(),
+          'accept': 'application/json',
+        },
         params: {
           entry: journalEntry
         }
@@ -38,7 +48,13 @@ export const fetchWeeklyReport = async (userId) => {
     
     // Create a promise that will be cached and returned for duplicate requests
     weeklyReportCache[userId] = axios.get(
-      `${API_BASE_URL}/analytics/weekly-analysis/${userId}`
+      `${API_BASE_URL}/analytics/combined-weekly-report/${userId}`,
+      {
+        headers: {
+          ...getAuthHeader(),
+          'accept': 'application/json',
+        }
+      }
     )
     .then(response => {
       console.log('Received weekly report data successfully');

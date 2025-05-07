@@ -26,15 +26,15 @@ const Signin = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     
-    const result = signIn(email, password);
+    const result = await signIn(email, password);
     
     if (result.success) {
-      // Redirect to how page
-      navigate('/how');
+      // Force a page reload to update the header
+      window.location.href = '/how';
     } else {
       setError(result.message);
     }

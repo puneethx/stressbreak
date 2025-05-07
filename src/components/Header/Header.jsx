@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import "./Header.scss"
 import { Link } from 'react-router-dom';
-import { isLoggedIn, getCurrentUser, signOut } from '../../services/authService';
+import { isLoggedIn, getUserRole, signOut, getCurrentUser } from '../../services/authService';
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
+    const [userRole, setUserRole] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
@@ -20,6 +21,7 @@ const Header = () => {
 
         // Check if user is logged in
         if (isLoggedIn()) {
+            setUserRole(getUserRole());
             setCurrentUser(getCurrentUser());
         }
 
@@ -29,8 +31,27 @@ const Header = () => {
         };
     }, []);
 
+    // Add event listener for storage changes
+    useEffect(() => {
+        const handleStorageChange = () => {
+            if (isLoggedIn()) {
+                setUserRole(getUserRole());
+                setCurrentUser(getCurrentUser());
+            } else {
+                setUserRole(null);
+                setCurrentUser(null);
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
+
     const handleSignOut = () => {
         signOut();
+        setUserRole(null);
         setCurrentUser(null);
         window.location.href = '/';
     };
@@ -41,11 +62,6 @@ const Header = () => {
         { text: 'How', color: '#e84393', path: '/how' },
         { text: "What's New", color: '#2ecc71', path: '/whats-new' }
     ];
-
-    // Get first 8 characters of email or the entire email if less than 8 characters
-    const displayEmail = currentUser?.email 
-        ? currentUser.email.substring(0, 7) 
-        : '';
 
     return (
         <div className={`Header ${scrolled ? 'scrolled' : ''}`}>
@@ -69,14 +85,14 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className='menu'>
-                    {currentUser ? (
+                    {userRole ? (
                         <>
-                            <p className='menu-item1 user-email'>{displayEmail}</p>
+                            <p className='menu-item1 user-email'>{currentUser?.user_name || 'User'}</p>
                             <button className='menu-item2 sign-out' onClick={handleSignOut}>Sign Out</button>
                         </>
                     ) : (
                         <>
-                            <Link to="/signin"><p className='menu-item1'>Login</p></Link>
+                            <Link to="/signin"><p className='menu-item1'>Sign In</p></Link>
                             <Link to="/signup"><button className='menu-item2'>Sign Up</button></Link>
                         </>
                     )}

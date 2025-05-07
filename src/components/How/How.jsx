@@ -6,7 +6,7 @@ import Recimg from "../../assets/rec_imgs.png"
 import Everything from "../../assets/everything.png"
 import "./How.scss"
 import { analyzeJournal, fetchWeeklyReport } from '../../services/apiService'
-import { getCurrentUser } from '../../services/authService'
+import { getCurrentUser, getUserRole } from '../../services/authService'
 import JournalAnalysis from '../JournalAnalysis/JournalAnalysis'
 import WeeklyInsights from '../WeeklyInsights/WeeklyInsights'
 import { WeeklyDataContext } from '../../contexts/WeeklyDataContext'
@@ -29,26 +29,25 @@ const How = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const currentUser = getCurrentUser();
-    
+    const [userRole, setUserRole] = useState(null);
+
     // Get weekly data context
-    const { 
-        weeklyData, 
-        setWeeklyData, 
-        loading: weeklyLoading, 
+    const {
+        weeklyData,
+        setWeeklyData,
+        loading: weeklyLoading,
         setLoading: setWeeklyLoading,
         error: weeklyError,
         setError: setWeeklyError
     } = useContext(WeeklyDataContext);
 
-    // Fetch weekly report on component mount
+    // Only fetch weekly data if user role is 5
     useEffect(() => {
         const loadWeeklyData = async () => {
-            if (currentUser && !weeklyData) {
+            if (currentUser && !weeklyData && userRole === '5') {
                 setWeeklyLoading(true);
                 try {
-                    console.log('Fetching weekly data for user:', currentUser.user_id);
-                    // Use a fixed user_id of 1 for testing as specified in the requirements
-                    const userId = currentUser.email === 'gundamanieshreddy2004@gmail.com' ? 1 : currentUser.user_id;
+                    const userId = currentUser.id;
                     const data = await fetchWeeklyReport(userId);
                     setWeeklyData(data);
                 } catch (err) {
@@ -59,9 +58,13 @@ const How = () => {
                 }
             }
         };
-        
+
         loadWeeklyData();
-    }, [currentUser, weeklyData, setWeeklyData, setWeeklyLoading, setWeeklyError]);
+    }, [currentUser, weeklyData, setWeeklyData, setWeeklyLoading, setWeeklyError, userRole]);
+
+    useEffect(() => {
+        setUserRole(getUserRole());
+    }, []);
 
     const recommendations = {
         Quotes: [
@@ -98,7 +101,7 @@ const How = () => {
 
     const handleJournalSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (!journalContent.trim()) {
             setError('Please write something in your journal.');
             return;
@@ -106,11 +109,11 @@ const How = () => {
 
         setLoading(true);
         setError(null);
-        
+
         try {
             const result = await analyzeJournal(journalContent);
             setAnalysisData(result);
-            
+
             // We don't reset the title or content immediately so we can keep the title for the analysis
             // The inputs will clear if the user starts a new journal
         } catch (err) {
@@ -152,54 +155,74 @@ const How = () => {
                             <span>Made for those seeking balance,<br />
                                 clarity, and support.</span>
                         </div>
-                        <div className="journal">
-                            <p className='jou-tit'>Journal</p>
-                            <div className='jou-text'>
-                                <p className='jou-main'>New Entry</p>
-                                <form onSubmit={handleJournalSubmit}>
-                                    <input 
-                                        className='jou-title' 
-                                        placeholder='Title' 
-                                        name='title' 
-                                        type='text'
-                                        value={journalTitle}
-                                        onChange={(e) => setJournalTitle(e.target.value)}
-                                        required 
-                                    />
-                                    <div className='jou-line'>
-                                        <div className="jou-pine"></div>
+                        {userRole !== '5' && (
+                            <>
+                                <div className="journal">
+                                    <p className='jou-tit'>Journal</p>
+                                    <div className='jou-text'>
+                                        <p className='jou-main'>New Entry</p>
+                                        <form onSubmit={handleJournalSubmit}>
+                                            <input
+                                                className='jou-title'
+                                                placeholder='Title'
+                                                name='title'
+                                                type='text'
+                                                value={journalTitle}
+                                                onChange={(e) => setJournalTitle(e.target.value)}
+                                                required
+                                            />
+                                            <div className='jou-line'>
+                                                <div className="jou-pine"></div>
+                                            </div>
+                                            <div className="jou-area">
+                                                <textarea
+                                                    className='jou-here'
+                                                    placeholder='Write your journal here...'
+                                                    value={journalContent}
+                                                    onChange={(e) => setJournalContent(e.target.value)}
+                                                    required
+                                                />
+                                            </div>
+                                            {error && <p className="journal-error">{error}</p>}
+                                            <div className="jou-btn-div">
+                                                <button
+                                                    className='jou-button'
+                                                    type='submit'
+                                                    disabled={loading}
+                                                >
+                                                    {loading ? 'Reflecting...' : 'Reflect'}
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div className="jou-area">
-                                        <textarea 
-                                            className='jou-here' 
-                                            placeholder='Write your journal here...'
-                                            value={journalContent}
-                                            onChange={(e) => setJournalContent(e.target.value)}
-                                            required 
+                                </div>
+                                <div className="journal-analysis">
+                                    {analysisData && (
+                                        <JournalAnalysis
+                                            analysisData={analysisData}
+                                            journalTitle={journalTitle}
                                         />
-                                    </div>
-                                    {error && <p className="journal-error">{error}</p>}
-                                    <div className="jou-btn-div">
-                                        <button 
-                                            className='jou-button' 
-                                            type='submit'
-                                            disabled={loading}
-                                        >
-                                            {loading ? 'Reflecting...' : 'Reflect'}
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        
-                        {/* Display journal analysis if available */}
-                        {analysisData && (
-                            <JournalAnalysis 
-                                analysisData={analysisData} 
-                                journalTitle={journalTitle}
-                            />
+                                    )}
+                                </div>
+                            </>
                         )}
-                        
+                        {userRole === '5' && (
+                            <>
+                                <div className="weekly-insights">
+                                    <p className='week-tit'>Progress</p>
+                                    <div className='week-text'>
+                                        <p className='week-main'>Weekly Insights</p>
+                                        <div className='week-line'>
+                                            <div className="week-pine"></div>
+                                        </div>
+                                        <div className="week-area">
+                                            <WeeklyInsights />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </>
+                        )}
                         <div className="prev-journal">
                             <p className='prev-jou-tit'>Previous Journals</p>
                             <div className='prev-jou-text'>
@@ -252,18 +275,6 @@ const How = () => {
                                             ))}
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="weeks">
-                            <p className='week-tit'>Progress</p>
-                            <div className='week-text'>
-                                <p className='week-main'>Weekly Insights</p>
-                                <div className='week-line'>
-                                    <div className="week-pine"></div>
-                                </div>
-                                <div className="week-area">
-                                    <WeeklyInsights />
                                 </div>
                             </div>
                         </div>
