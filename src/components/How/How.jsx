@@ -13,10 +13,23 @@ import { WeeklyDataContext } from '../../contexts/WeeklyDataContext'
 
 import recbook from "../../assets/recbook.png";
 import recbook2 from "../../assets/recbook2.png";
+import recbook199 from "../../assets/recbook199.png";
+import recbook198 from "../../assets/recbook198.png";
+import recbook197 from "../../assets/recbook197.png";
 import recexer from "../../assets/recexer.png";
 import recexer2 from "../../assets/recexer2.png";
+import recexer3 from "../../assets/recexer3.png";
+import recexer4 from "../../assets/recexer4.png";
+import recexer5 from "../../assets/recexer5.png";
 import recfood from "../../assets/recfood.png";
+import recfood2 from "../../assets/recfood2.png";
+import recfood3 from "../../assets/recfood3.png";
+import recfood4 from "../../assets/recfood4.png";
+import recfood5 from "../../assets/recfood5.png";
+import recfood6 from "../../assets/recfood6.png";
 import recmusic from "../../assets/recmusic.png";
+import recmusic2 from "../../assets/recmusic2.png";
+
 
 import box1 from "../../assets/box1.png"
 import box2 from "../../assets/box2.png"
@@ -30,7 +43,23 @@ const How = () => {
     const [error, setError] = useState(null);
     const currentUser = getCurrentUser();
     const [userRole, setUserRole] = useState(null);
+    const [randomRecommendations, setRandomRecommendations] = useState(null);
 
+
+    const journalData = [
+        { id: 1, title: "Morning Reflections", journal: "Today started with a peaceful sunrise and a cup of coffee." },
+        { id: 2, title: "Coding Adventures", journal: "Explored React hooks and built a new project from scratch." },
+        { id: 3, title: "Workout Progress", journal: "Managed to run 5km today, feeling stronger!" },
+        { id: 4, title: "Book Review", journal: "Finished reading 'Atomic Habits' – really insightful!" },
+        { id: 5, title: "Weekend Plans", journal: "Looking forward to a hiking trip with friends." },
+        { id: 6, title: "Movie Night", journal: "Watched 'Inception' again, mind-blowing as always." },
+        { id: 7, title: "Work Updates", journal: "Completed the dashboard UI and pushed it to GitHub." },
+        { id: 8, title: "Music Discovery", journal: "Discovered a new jazz playlist that I really love." },
+        { id: 9, title: "Tech Trends", journal: "AI developments are happening rapidly, exciting times!" },
+        { id: 10, title: "Family Time", journal: "Had a great dinner with family, lots of laughter." }
+    ];
+
+    
     // Get weekly data context
     const {
         weeklyData,
@@ -40,6 +69,65 @@ const How = () => {
         error: weeklyError,
         setError: setWeeklyError
     } = useContext(WeeklyDataContext);
+
+    // Function to get random items from an array
+    const getRandomItems = (array, count) => {
+        const shuffled = [...array].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    };
+
+    // Set random recommendations when component mounts
+    useEffect(() => {
+        const recommendations = {
+            Quotes: [
+                { id: 1, quote: "The key is not to prioritize what's on your schedule, but to schedule your priorities.", by: "Stephen Covey" },
+                { id: 2, quote: "The only way to do great work is to love what you do.", by: "Steve Jobs" },
+                { id: 3, quote: "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful.", by: "Albert Schweitzer" },
+                { id: 4, quote: "The best way to predict the future is to invent it.", by: "Alan Kay" }
+            ],
+            Books: [
+                { id: 1, name: "Ikigai", image: recbook },
+                { id: 2, name: "Enchantment", image: recbook2 },
+                { id: 3, name: "The Power Of Now", image: recbook199 },
+                { id: 4, name: "Dare to Lead", image: recbook198 },
+                { id: 5, name: "Essentialism", image: recbook197 }
+            ],
+            Exercises: [
+                { id: 3, name: "Yoga", image: recexer },
+                { id: 4, name: "Meditation", image: recexer2 },
+                { id: 5, name: "Jogging", image: recexer3 },
+                { id: 6, name: "Nature Walk", image: recexer4 },
+                { id: 7, name: "Free Dance", image: recexer5 }
+            ],
+            Food: [
+                { id: 5, name: "Fruits", image: recfood },
+                { id: 6, name: "Herbal Tea", image: recfood2 },
+                { id: 7, name: "Leafy Greens", image: recfood3 },
+                { id: 8, name: "Dark Chocolate", image: recfood4 },
+                { id: 9, name: "Eggs", image: recfood5 },
+                { id: 10, name: "Avacado", image: recfood6 }
+
+            ],
+            Music: [
+                { id: 6, name: "Piano", image: recmusic },
+                { id: 7, name: "Violin", image: recmusic2 }
+            ],
+        };
+
+        // Get one random quote and two random books
+        const randomQuote = getRandomItems(recommendations.Quotes, 1)[0];
+        const randomBooks = getRandomItems(recommendations.Books, 3);
+        const randomExercises = getRandomItems(recommendations.Exercises, 3);
+        const randomFood = getRandomItems(recommendations.Food, 3);
+
+        setRandomRecommendations({
+            Quotes: [randomQuote],
+            Books: randomBooks,
+            Exercises: randomExercises,
+            Food: randomFood,
+            Music: recommendations.Music
+        });
+    }, []);
 
     // Only fetch weekly data if user role is 5
     useEffect(() => {
@@ -66,41 +154,13 @@ const How = () => {
         setUserRole(getUserRole());
     }, []);
 
-    const recommendations = {
-        Quotes: [
-            { id: 1, quote: "The key is not to prioritize what's on your schedule, but to schedule your priorities.", by: "Stephen Covey" }
-        ],
-        Books: [
-            { id: 1, name: "Ikigai", image: recbook },
-            { id: 2, name: "Enchantment", image: recbook2 },
-        ],
-        Exercises: [
-            { id: 3, name: "Yoga", image: recexer },
-            { id: 4, name: "Meditation", image: recexer2 },
-        ],
-        Food: [
-            { id: 5, name: "Fruits", image: recfood },
-        ],
-        Music: [
-            { id: 6, name: "Piano", image: recmusic },
-        ],
-    };
-
-    const journalData = [
-        { id: 1, title: "Morning Reflections", journal: "Today started with a peaceful sunrise and a cup of coffee." },
-        { id: 2, title: "Coding Adventures", journal: "Explored React hooks and built a new project from scratch." },
-        { id: 3, title: "Workout Progress", journal: "Managed to run 5km today, feeling stronger!" },
-        { id: 4, title: "Book Review", journal: "Finished reading 'Atomic Habits' – really insightful!" },
-        { id: 5, title: "Weekend Plans", journal: "Looking forward to a hiking trip with friends." },
-        { id: 6, title: "Movie Night", journal: "Watched 'Inception' again, mind-blowing as always." },
-        { id: 7, title: "Work Updates", journal: "Completed the dashboard UI and pushed it to GitHub." },
-        { id: 8, title: "Music Discovery", journal: "Discovered a new jazz playlist that I really love." },
-        { id: 9, title: "Tech Trends", journal: "AI developments are happening rapidly, exciting times!" },
-        { id: 10, title: "Family Time", journal: "Had a great dinner with family, lots of laughter." }
-    ];
-
     const handleJournalSubmit = async (e) => {
         e.preventDefault();
+
+        if (!currentUser) {
+            setError('Please log in to submit a journal entry.');
+            return;
+        }
 
         if (!journalContent.trim()) {
             setError('Please write something in your journal.');
@@ -113,12 +173,15 @@ const How = () => {
         try {
             const result = await analyzeJournal(journalContent);
             setAnalysisData(result);
-
-            // We don't reset the title or content immediately so we can keep the title for the analysis
-            // The inputs will clear if the user starts a new journal
         } catch (err) {
             console.error('Error analyzing journal:', err);
-            setError('Failed to analyze journal. Please try again.');
+            if (err.response?.status === 401) {
+                setError('Your session has expired. Please log in again.');
+            } else if (err.response?.status === 403) {
+                setError('You do not have permission to submit journal entries.');
+            } else {
+                setError('Failed to analyze journal. Please try again.');
+            }
         } finally {
             setLoading(false);
         }
@@ -183,7 +246,7 @@ const How = () => {
                                                     required
                                                 />
                                             </div>
-                                            {error && <p className="journal-error">{error}</p>}
+                                            {error && <p className="error-message">{error}</p>}
                                             <div className="jou-btn-div">
                                                 <button
                                                     className='jou-button'
@@ -195,14 +258,6 @@ const How = () => {
                                             </div>
                                         </form>
                                     </div>
-                                </div>
-                                <div className="journal-analysis">
-                                    {analysisData && (
-                                        <JournalAnalysis
-                                            analysisData={analysisData}
-                                            journalTitle={journalTitle}
-                                        />
-                                    )}
                                 </div>
                             </>
                         )}
@@ -220,7 +275,6 @@ const How = () => {
                                         </div>
                                     </div>
                                 </div>
-
                             </>
                         )}
                         <div className="prev-journal">
@@ -252,7 +306,7 @@ const How = () => {
                                 <div className="recand">
                                     <div className="recdook">
                                         <div className='recs'>
-                                            {Object.entries(recommendations).map(([category, items]) => (
+                                            {randomRecommendations && Object.entries(randomRecommendations).map(([category, items]) => (
                                                 <div key={category} className="rec">
                                                     <p className="reccat">{category}:</p>
                                                     <div className="recdiv">
