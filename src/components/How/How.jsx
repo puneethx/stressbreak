@@ -59,7 +59,7 @@ const How = () => {
         { id: 10, title: "Family Time", journal: "Had a great dinner with family, lots of laughter." }
     ];
 
-    
+
     // Get weekly data context
     const {
         weeklyData,
@@ -258,6 +258,14 @@ const How = () => {
                                             </div>
                                         </form>
                                     </div>
+                                </div>
+                                <div className="journal-analysis">
+                                    {analysisData && (
+                                        <JournalAnalysis
+                                            analysisData={analysisData}
+                                            journalTitle={journalTitle}
+                                        />
+                                    )}
                                 </div>
                             </>
                         )}
